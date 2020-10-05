@@ -14,6 +14,7 @@ public class CP3LinkedList<E> {
      private class Node {
 		public E data;
 		public Node next;
+		public Node previous;
 	}
 	private Node first;
      private Node last;
@@ -24,6 +25,7 @@ public class CP3LinkedList<E> {
 	public CP3LinkedList()
 	{  
 		first = null;
+		last = null;
 	}
  
 	/**
@@ -46,12 +48,14 @@ public class CP3LinkedList<E> {
 	}
 
 	//MODIFY IF THERE'S ONLY ONE ELEMENT
-	public E removeFirst() {
+	public void removeFirst() {
 		if (first == null)
 			throw new NoSuchElementException();
-		E element = first.data;
 		first = first.next;
-		return element;
+		if(first == null)
+		{
+			last = null;
+		}
 	}
 
 	//Q5 Add previous to Node
@@ -105,6 +109,19 @@ public class CP3LinkedList<E> {
 
 	public void addLast(E element)
 	{
+		Node newNode = new Node();
+		newNode.data = element;
+		newNode.next = null;
+		if (last!=null) {
+			last.next = newNode;
+		}
+		if(first == null)
+		{
+			first = newNode;
+		}
+		last = newNode;
+
+
 	}
 
 	
